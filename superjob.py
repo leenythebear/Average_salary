@@ -34,3 +34,11 @@ def predict_rub_salary_for_superjob(vacancy):
     else:
         average_salary = None
     return average_salary
+
+
+
+if __name__ == '__main__':
+    for language in languages:
+        vacancies = get_vacancies_sj(language)
+        for vacancy in vacancies['objects']:
+            print(predict_rub_salary_for_superjob(vacancy))
