@@ -22,3 +22,15 @@ def get_vacancies_sj(language):
     response = requests.get(sj_url, headers=headers, params=params)
     response.raise_for_status()
     return response.json()
+
+
+def predict_rub_salary_for_superjob(vacancy):
+    if vacancy['payment_from'] and vacancy['payment_to']:
+        average_salary = (vacancy['payment_from'] + vacancy['payment_to']) / 2
+    elif vacancy['payment_from'] == 0:
+        average_salary = vacancy['payment_to'] * 0.8
+    elif vacancy['payment_to'] == 0:
+        average_salary = vacancy['payment_from'] * 1.2
+    else:
+        average_salary = None
+    return average_salary
