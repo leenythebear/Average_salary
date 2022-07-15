@@ -2,6 +2,14 @@ from pprint import pprint
 
 import requests as requests
 
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
+secret_key = os.getenv('SECRET_KEY')
+client_id = os.getenv('ID')
+
+
 languages = ['Python', 'JavaScript', 'Java', 'Ruby', 'PHP', 'C++', 'C#', 'C', 'Go', 'Shell']
 sj_url = 'https://api.superjob.ru/2.0/vacancies'
 
