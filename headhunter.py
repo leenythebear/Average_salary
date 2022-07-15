@@ -71,3 +71,8 @@ def predict_rub_salary_hh(vacancy):
     else:
         average_salary = (salary["from"] + salary["to"]) / 2
     return average_salary
+
+
+if __name__ == '__main__':
+    for language in languages:
+        vacancies = get_all_vacancies(language)
