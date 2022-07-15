@@ -1,3 +1,6 @@
+from pprint import pprint
+
+import requests as requests
 
 languages = ['Python', 'JavaScript', 'Java', 'Ruby', 'PHP', 'C++', 'C#', 'C', 'Go', 'Shell']
 sj_url = 'https://api.superjob.ru/2.0/vacancies'
