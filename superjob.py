@@ -22,6 +22,20 @@ def get_response(language, page, url):
     return response.json()
 
 
+def get_all_language_vacancies(language, url):
+    language_vacancies_list = []
+    page = 0
+    foo_bar = get_response(language, page, url)
+    vacancies_per_page = 20
+    total_vacancies = foo_bar['total']
+    while 0 < total_vacancies:
+        vacancies = get_response(language, page, url)
+        page += 1
+        total_vacancies -= vacancies_per_page
+        language_vacancies_list.extend(vacancies['objects'])
+    return language_vacancies_list
+
+
 def predict_rub_salary_for_superjob(vacancy):
     if vacancy['payment_from'] and vacancy['payment_to']:
         average_salary = (vacancy['payment_from'] + vacancy['payment_to']) / 2
