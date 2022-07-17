@@ -16,28 +16,31 @@ languages = [
 ]
 
 
-def get_all_vacancies(language):
-    vacancies_hh = {}
-    for language in languages:
-        sum_of_salary = 0
-        count = 0
-        page = 0
-        pages_number = 1
-        search = {
-            "text": f"Разработчик {language}",
-            "area": 1,
-            "period": 30,
-            "page": page,
-        }
-        vacancies_list = []
-        while page < pages_number:
-            headers = {"User-Agent": "User-Agent"}
-            page_response = requests.get(hh_url, headers=headers, params=search)
-            page_response.raise_for_status()
-            pages_number = page_response.json()["pages"]
-            page += 1
-            vacancies_list.append(page_response.json())
-        return vacancies_list
+def get_response(language, page, hh_url):
+    search = {
+        "text": f"Разработчик {language}",
+        "area": 1,
+        "period": 30,
+        "page": page,
+    }
+    headers = {"User-Agent": "User-Agent"}
+    page_response = requests.get(hh_url, headers=headers, params=search)
+    page_response.raise_for_status()
+    return page_response.json()
+
+
+def get_all_language_vacancies(language, hh_url):
+    language_vacancies_list = []
+    page = 0
+    foo_bar = get_response(language, page, hh_url)
+    page += 1
+    pages_number = foo_bar['pages']
+    while page < pages_number:
+        vacancies = get_response(language, page, hh_url)
+        page += 1
+        print(2341234, vacancies['items'])
+        language_vacancies_list.extend(vacancies['items'])
+    return language_vacancies_list
 
     #     for vacancy in page_response.json()["items"]:
     #         average_salary = predict_rub_salary_hh(vacancy)
