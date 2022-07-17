@@ -82,4 +82,6 @@ def predict_rub_salary_hh(vacancy):
 
 if __name__ == '__main__':
     for language in languages:
-        vacancies = get_all_vacancies(language)
+        vacancies = get_all_language_vacancies(language, hh_url)
+        print(124234324341, vacancies)
+        break
