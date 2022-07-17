@@ -76,7 +76,5 @@ def get_total_average_salary(url, languages):
 
 
 if __name__ == '__main__':
-    for language in languages:
-        vacancies = get_vacancies_sj(language)
-        for vacancy in vacancies['objects']:
-            print(predict_rub_salary_for_superjob(vacancy))
+    total_salary = get_total_average_salary(sj_url, languages)
+    print(total_salary)
