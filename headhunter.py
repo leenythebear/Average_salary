@@ -43,7 +43,8 @@ def get_all_language_vacancies(language, hh_url):
     return language_vacancies_list
 
 
-def foo_bar():
+def foo_bar(languages):
+    vacancies_hh = {}
     for language in languages:
         vacancies = get_all_language_vacancies(language, hh_url)
         for vacancy in page_response.json()["items"]:
