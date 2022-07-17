@@ -48,6 +48,32 @@ def predict_rub_salary_for_superjob(vacancy):
     return average_salary
 
 
+def get_total_average_salary(url, languages):
+    sj_vacancies = {}
+    for language in languages:
+        sum_of_salary = 0
+        count = 0
+        vacancies = get_all_language_vacancies(language, url)
+        # print(111, vacancies, language)
+        for vacancy in vacancies:
+            average_salary = predict_rub_salary_for_superjob(vacancy)
+            if average_salary == 0:
+                continue
+            else:
+                sum_of_salary += average_salary
+                count += 1
+        # if count == 0:
+
+        sj_vacancies.setdefault(
+            language,
+            {
+                "vacancies_found": len(vacancies),
+                "vacancies_processed": count,
+                "average_salary": int(sum_of_salary / count) if count else 0,
+            },
+        )
+    return sj_vacancies
+
 
 if __name__ == '__main__':
     for language in languages:
