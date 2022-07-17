@@ -46,8 +46,10 @@ def get_all_language_vacancies(language, hh_url):
 def foo_bar(languages):
     vacancies_hh = {}
     for language in languages:
+        sum_of_salary = 0
+        count = 0
         vacancies = get_all_language_vacancies(language, hh_url)
-        for vacancy in page_response.json()["items"]:
+        for vacancy in vacancies:
             average_salary = predict_rub_salary_hh(vacancy)
             if not average_salary:
                 continue
@@ -55,13 +57,14 @@ def foo_bar(languages):
                 sum_of_salary += average_salary
                 count += 1
         vacancies_hh.setdefault(
-        language,
-        {
-            "vacancies_found": page_response.json()["found"],
-            "vacancies_processed": count,
-            "average_salary": int(sum_of_salary / count),
-        },
+            language,
+            {
+                "vacancies_found": len(vacancies),
+                "vacancies_processed": count,
+                "average_salary": int(sum_of_salary / count),
+            },
         )
+    return vacancies_hh
 
 
 def predict_rub_salary_hh(vacancy):
