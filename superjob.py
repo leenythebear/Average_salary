@@ -75,6 +75,10 @@ def get_total_average_salary(url, languages):
     return sj_vacancies
 
 
-if __name__ == '__main__':
+def main_sj():
     total_salary = get_total_average_salary(sj_url, languages)
-    print(total_salary)
+    return total_salary
+
+
+if __name__ == '__main__':
+    main_sj()
