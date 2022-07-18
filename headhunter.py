@@ -32,9 +32,10 @@ def get_response(language, page, hh_url):
 def get_all_language_vacancies(language, hh_url):
     language_vacancies_list = []
     page = 0
-    foo_bar = get_response(language, page, hh_url)
+    first_page_vacancies = get_response(language, page, hh_url)
     page += 1
-    pages_number = foo_bar['pages']
+    language_vacancies_list.extend(first_page_vacancies['items'])
+    pages_number = first_page_vacancies['pages']
     while page < pages_number:
         vacancies = get_response(language, page, hh_url)
         page += 1
@@ -42,7 +43,7 @@ def get_all_language_vacancies(language, hh_url):
     return language_vacancies_list
 
 
-def foo_bar(languages):
+def get_total_average_salary(languages):
     vacancies_hh = {}
     for language in languages:
         sum_of_salary = 0
@@ -84,7 +85,7 @@ def predict_rub_salary_hh(vacancy):
 
 
 def main_hh():
-    average_salary = foo_bar(languages)
+    average_salary = get_total_average_salary(languages)
     return average_salary
 
 
