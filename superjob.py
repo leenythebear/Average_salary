@@ -55,7 +55,6 @@ def get_total_average_salary(url, languages):
         sum_of_salary = 0
         count = 0
         vacancies = get_all_language_vacancies(language, url)
-        # print(111, vacancies, language)
         for vacancy in vacancies:
             average_salary = predict_rub_salary_for_superjob(vacancy)
             if average_salary == 0:
@@ -63,8 +62,6 @@ def get_total_average_salary(url, languages):
             else:
                 sum_of_salary += average_salary
                 count += 1
-        # if count == 0:
-
         sj_vacancies.setdefault(
             language,
             {
