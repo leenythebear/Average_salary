@@ -25,9 +25,10 @@ def get_response(language, page, url):
 def get_all_language_vacancies(language, url):
     language_vacancies_list = []
     page = 0
-    foo_bar = get_response(language, page, url)
+    first_list_vacancies = get_response(language, page, url)
     vacancies_per_page = 20
-    total_vacancies = foo_bar['total']
+    total_vacancies = first_list_vacancies['total']
+    language_vacancies_list.extend(first_list_vacancies['objects'])
     while 0 < total_vacancies:
         vacancies = get_response(language, page, url)
         page += 1
