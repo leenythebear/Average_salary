@@ -38,7 +38,6 @@ def get_all_language_vacancies(language, hh_url):
     while page < pages_number:
         vacancies = get_response(language, page, hh_url)
         page += 1
-        # print(2341234, vacancies['items'])
         language_vacancies_list.extend(vacancies['items'])
     return language_vacancies_list
 
