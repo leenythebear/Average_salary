@@ -84,6 +84,10 @@ def predict_rub_salary_hh(vacancy):
     return average_salary
 
 
-if __name__ == '__main__':
+def main_hh():
     average_salary = foo_bar(languages)
-    print(average_salary)
+    return average_salary
+
+
+if __name__ == '__main__':
+    main_hh()
