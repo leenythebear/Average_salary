@@ -44,7 +44,7 @@ def get_all_language_vacancies(language, hh_url):
 
 
 def get_total_average_salary(languages):
-    vacancies_hh = {}
+    hh_vacancies = {}
     for language in languages:
         sum_of_salary = 0
         count = 0
@@ -56,7 +56,7 @@ def get_total_average_salary(languages):
             else:
                 sum_of_salary += average_salary
                 count += 1
-        vacancies_hh.setdefault(
+        hh_vacancies.setdefault(
             language,
             {
                 "vacancies_found": len(vacancies),
@@ -64,7 +64,7 @@ def get_total_average_salary(languages):
                 "average_salary": int(sum_of_salary / count),
             },
         )
-    return vacancies_hh
+    return hh_vacancies
 
 
 def predict_rub_salary_hh(vacancy):
