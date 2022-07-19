@@ -6,8 +6,13 @@ from superjob import main_sj
 
 def create_table(vacancies_statistic, title):
     table_data = [
-        ['Язык программирования', 'Вакансий найдено', 'Вакансий обработано',
-         'Средняя зарплата']]
+        [
+            "Язык программирования",
+            "Вакансий найдено",
+            "Вакансий обработано",
+            "Средняя зарплата",
+        ]
+    ]
     for language, data in vacancies_statistic.items():
         table_data.append([language] + list(data.values()))
     table = AsciiTable(table_data, title)
