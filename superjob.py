@@ -72,8 +72,8 @@ def get_total_average_salary(url, languages):
 
 
 def main_sj():
-    total_salary = get_total_average_salary(sj_url, languages)
-    return total_salary
+    average_salaries_statistic = get_total_average_salary(sj_url, languages)
+    return average_salaries_statistic
 
 
 if __name__ == '__main__':
