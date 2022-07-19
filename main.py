@@ -4,15 +4,6 @@ from headhunter import main_hh
 from superjob import main_sj
 
 
-table_data = [['Язык программирования', 'Вакансий найдено', 'Вакансий обработано', 'Средняя зарплата']]
-
-vacancies_statistic_sj = main_sj()
-title_sj = 'SuperJob Moscow'
-
-vacancies_statistic_hh = main_hh()
-title_hh = 'Headhunter Moscow'
-
-
 def create_table(vacancies_statistic, title):
     table_data = [
         ['Язык программирования', 'Вакансий найдено', 'Вакансий обработано',
@@ -23,7 +14,17 @@ def create_table(vacancies_statistic, title):
     print(table.table)
 
 
-if __name__ == '__main__':
+def main():
+    vacancies_statistic_sj = main_sj()
+    title_sj = "SuperJob Moscow"
+
+    vacancies_statistic_hh = main_hh()
+    title_hh = "Headhunter Moscow"
+
     create_table(vacancies_statistic_hh, title_hh)
     print()
     create_table(vacancies_statistic_sj, title_sj)
+
+
+if __name__ == "__main__":
+    main()
