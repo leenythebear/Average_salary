@@ -16,7 +16,7 @@ def create_table(vacancies_statistic, title):
     for language, data in vacancies_statistic.items():
         table_data.append([language] + list(data.values()))
     table = AsciiTable(table_data, title)
-    print(table.table)
+    return table.table
 
 
 def main():
@@ -26,9 +26,9 @@ def main():
     vacancies_statistic_hh = main_hh()
     title_hh = "Headhunter Moscow"
 
-    create_table(vacancies_statistic_hh, title_hh)
+    print(create_table(vacancies_statistic_hh, title_hh))
     print()
-    create_table(vacancies_statistic_sj, title_sj)
+    print(create_table(vacancies_statistic_sj, title_sj))
 
 
 if __name__ == "__main__":
