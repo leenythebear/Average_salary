@@ -5,7 +5,7 @@ from superjob import main_sj
 
 
 def create_table(vacancies_statistic, title):
-    table_data = [
+    table_headers = [
         [
             "Язык программирования",
             "Вакансий найдено",
@@ -14,21 +14,21 @@ def create_table(vacancies_statistic, title):
         ]
     ]
     for language, data in vacancies_statistic.items():
-        table_data.append([language] + list(data.values()))
-    table = AsciiTable(table_data, title)
+        table_headers.append([language] + list(data.values()))
+    table = AsciiTable(table_headers, title)
     return table.table
 
 
 def main():
-    vacancies_statistic_sj = main_sj()
-    title_sj = "SuperJob Moscow"
+    sj_vacancies_statistic = main_sj()
+    sj_title = "SuperJob Moscow"
 
-    vacancies_statistic_hh = main_hh()
-    title_hh = "Headhunter Moscow"
+    hh_vacancies_statistic = main_hh()
+    hh_title = "Headhunter Moscow"
 
-    print(create_table(vacancies_statistic_hh, title_hh))
+    print(create_table(hh_vacancies_statistic, hh_title))
     print()
-    print(create_table(vacancies_statistic_sj, title_sj))
+    print(create_table(sj_vacancies_statistic, sj_title))
 
 
 if __name__ == "__main__":
