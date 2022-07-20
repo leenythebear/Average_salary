@@ -1,7 +1,14 @@
 from terminaltables import AsciiTable
+import os
+from dotenv import load_dotenv
 
 from headhunter import main_hh
 from superjob import main_sj
+
+
+load_dotenv()
+secret_key = os.getenv('SECRET_KEY')
+client_id = os.getenv('ID')
 
 
 def create_table(vacancies_statistic, title):
@@ -20,7 +27,7 @@ def create_table(vacancies_statistic, title):
 
 
 def main():
-    sj_vacancies_statistic = main_sj()
+    sj_vacancies_statistic = main_sj(secret_key)
     sj_title = "SuperJob Moscow"
 
     hh_vacancies_statistic = main_hh()
