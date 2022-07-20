@@ -1,7 +1,9 @@
 from terminaltables import AsciiTable
 
-from headhunter import main_hh
-from superjob import main_sj
+from settings import LANGUAGES
+
+from headhunter import get_hh_total_average_salary
+from superjob import get_sj_total_average_salary
 
 
 def create_table(vacancies_statistic, title):
