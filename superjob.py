@@ -3,17 +3,17 @@ import requests as requests
 from settings import SJ_URL, SECRET_KEY
 
 
-def get_response(language, page, url, secret_key):
+def get_response(language, page):
     vacancies_sphere = 48
     moscow_city_id = 4
-    headers = {"X-Api-App-Id": secret_key}
+    headers = {"X-Api-App-Id": SECRET_KEY}
     params = {
         "key": vacancies_sphere,
         "keywords": f"Разработчик {language}",
         "town": moscow_city_id,
         "page": page,
     }
-    response = requests.get(url, headers=headers, params=params)
+    response = requests.get(SJ_URL, headers=headers, params=params)
     response.raise_for_status()
     return response.json()
 
@@ -21,12 +21,12 @@ def get_response(language, page, url, secret_key):
 def get_all_language_vacancies(language):
     language_vacancies = []
     page = 0
-    first_page_vacancies = get_response(language, page, SJ_URL, SECRET_KEY)
+    first_page_vacancies = get_response(language, page)
     vacancies_per_page = 20
     total_vacancies = first_page_vacancies['total']
     language_vacancies.extend(first_page_vacancies['objects'])
     while 0 < total_vacancies:
-        vacancies = get_response(language, page, SJ_URL, SECRET_KEY)
+        vacancies = get_response(language, page)
         page += 1
         total_vacancies -= vacancies_per_page
         language_vacancies.extend(vacancies['objects'])

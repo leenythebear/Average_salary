@@ -3,7 +3,7 @@ import requests as requests
 from settings import HH_URL
 
 
-def get_response(language, page, url):
+def get_response(language, page):
     moscow_city_id = 1
     publication_period = 30
     search = {
@@ -13,7 +13,7 @@ def get_response(language, page, url):
         "page": page,
     }
     headers = {"User-Agent": "User-Agent"}
-    page_response = requests.get(url, headers=headers, params=search)
+    page_response = requests.get(HH_URL, headers=headers, params=search)
     page_response.raise_for_status()
     return page_response.json()
 
@@ -21,12 +21,12 @@ def get_response(language, page, url):
 def get_all_language_vacancies(language):
     language_vacancies = []
     page = 0
-    first_page_vacancies = get_response(language, page, HH_URL)
+    first_page_vacancies = get_response(language, page)
     page += 1
     language_vacancies.extend(first_page_vacancies['items'])
     pages_number = first_page_vacancies['pages']
     while page < pages_number:
-        vacancies = get_response(language, page, HH_URL)
+        vacancies = get_response(language, page)
         page += 1
         language_vacancies.extend(vacancies['items'])
     return language_vacancies
