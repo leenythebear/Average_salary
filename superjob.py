@@ -1,8 +1,7 @@
 import requests as requests
 
-from settings import SJ_URL, SECRET_KEY
-
 from common import calculate_average_salary
+from settings import SECRET_KEY, SJ_URL
 
 
 def get_response(language, page):

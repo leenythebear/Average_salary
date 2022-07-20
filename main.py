@@ -1,8 +1,7 @@
 from terminaltables import AsciiTable
 
-from settings import LANGUAGES
-
 from headhunter import get_hh_total_average_salary
+from settings import LANGUAGES
 from superjob import get_sj_total_average_salary
 
 

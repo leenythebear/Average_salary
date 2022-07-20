@@ -1,8 +1,7 @@
 import requests as requests
 
-from settings import HH_URL
-
 from common import calculate_average_salary
+from settings import HH_URL
 
 
 def get_response(language, page):
