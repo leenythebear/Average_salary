@@ -71,10 +71,3 @@ def predict_rub_salary_hh(vacancy):
     return average_salary
 
 
-def main_hh():
-    average_salary = get_total_average_salary(LANGUAGES)
-    return average_salary
-
-
-if __name__ == '__main__':
-    main_hh()

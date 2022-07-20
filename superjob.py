@@ -62,10 +62,3 @@ def get_sj_total_average_salary(languages):
     return sj_vacancies
 
 
-def main_sj():
-    average_salaries_statistic = get_total_average_salary(LANGUAGES)
-    return average_salaries_statistic
-
-
-if __name__ == '__main__':
-    main_sj()
