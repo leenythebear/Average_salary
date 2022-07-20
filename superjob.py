@@ -4,8 +4,15 @@ from settings import SJ_URL, SECRET_KEY
 
 
 def get_response(language, page, url, secret_key):
-    headers = {'X-Api-App-Id': secret_key}
-    params = {'key': 48, 'keywords': f'Разработчик {language}', 'town': 4, 'page': page}
+    vacancies_sphere = 48
+    moscow_city_id = 4
+    headers = {"X-Api-App-Id": secret_key}
+    params = {
+        "key": vacancies_sphere,
+        "keywords": f"Разработчик {language}",
+        "town": moscow_city_id,
+        "page": page,
+    }
     response = requests.get(url, headers=headers, params=params)
     response.raise_for_status()
     return response.json()

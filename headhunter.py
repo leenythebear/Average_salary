@@ -4,10 +4,12 @@ from settings import HH_URL
 
 
 def get_response(language, page, url):
+    moscow_city_id = 1
+    publication_period = 30
     search = {
         "text": f"Разработчик {language}",
-        "area": 1,
-        "period": 30,
+        "area": moscow_city_id,
+        "period": publication_period,
         "page": page,
     }
     headers = {"User-Agent": "User-Agent"}
