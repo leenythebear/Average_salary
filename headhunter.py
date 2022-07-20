@@ -1,6 +1,6 @@
 import requests as requests
 
-from settings import LANGUAGES, HH_URL
+from settings import HH_URL
 
 
 def get_response(language, page, url):
