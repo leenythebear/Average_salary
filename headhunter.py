@@ -17,17 +17,17 @@ def get_response(language, page, url):
 
 
 def get_all_language_vacancies(language):
-    language_vacancies_list = []
+    language_vacancies = []
     page = 0
     first_page_vacancies = get_response(language, page, HH_URL)
     page += 1
-    language_vacancies_list.extend(first_page_vacancies['items'])
+    language_vacancies.extend(first_page_vacancies['items'])
     pages_number = first_page_vacancies['pages']
     while page < pages_number:
         vacancies = get_response(language, page, HH_URL)
         page += 1
-        language_vacancies_list.extend(vacancies['items'])
-    return language_vacancies_list
+        language_vacancies.extend(vacancies['items'])
+    return language_vacancies
 
 
 def get_hh_total_average_salary(languages):

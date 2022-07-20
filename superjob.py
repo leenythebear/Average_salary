@@ -12,18 +12,18 @@ def get_response(language, page, url, secret_key):
 
 
 def get_all_language_vacancies(language):
-    language_vacancies_list = []
+    language_vacancies = []
     page = 0
-    first_list_vacancies = get_response(language, page, SJ_URL, SECRET_KEY)
+    first_page_vacancies = get_response(language, page, SJ_URL, SECRET_KEY)
     vacancies_per_page = 20
-    total_vacancies = first_list_vacancies['total']
-    language_vacancies_list.extend(first_list_vacancies['objects'])
+    total_vacancies = first_page_vacancies['total']
+    language_vacancies.extend(first_page_vacancies['objects'])
     while 0 < total_vacancies:
         vacancies = get_response(language, page, SJ_URL, SECRET_KEY)
         page += 1
         total_vacancies -= vacancies_per_page
-        language_vacancies_list.extend(vacancies['objects'])
-    return language_vacancies_list
+        language_vacancies.extend(vacancies['objects'])
+    return language_vacancies
 
 
 def predict_rub_salary_for_superjob(vacancy):
