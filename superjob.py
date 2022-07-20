@@ -1,6 +1,6 @@
 import requests as requests
 
-from settings import SJ_URL, SECRET_KEY, LANGUAGES
+from settings import SJ_URL, SECRET_KEY
 
 
 def get_response(language, page, url, secret_key):
