@@ -2,6 +2,8 @@ import requests as requests
 
 from settings import HH_URL
 
+from common import calculate_average_salary
+
 
 def get_response(language, page):
     moscow_city_id = 1
@@ -64,12 +66,8 @@ def predict_rub_salary_hh(vacancy):
         average_salary = None
     elif salary["currency"] != "RUR":
         average_salary = None
-    elif not salary["to"]:
-        average_salary = salary["from"] * 1.2
-    elif not salary["from"]:
-        average_salary = salary["to"] * 0.8
     else:
-        average_salary = (salary["from"] + salary["to"]) / 2
+        average_salary = calculate_average_salary(salary["from"], salary["to"])
     return average_salary
 
 

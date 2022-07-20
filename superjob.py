@@ -2,6 +2,8 @@ import requests as requests
 
 from settings import SJ_URL, SECRET_KEY
 
+from common import calculate_average_salary
+
 
 def get_response(language, page):
     vacancies_sphere = 48
@@ -34,14 +36,11 @@ def get_all_language_vacancies(language):
 
 
 def predict_rub_salary_for_superjob(vacancy):
-    if vacancy['payment_from'] and vacancy['payment_to']:
-        average_salary = (vacancy['payment_from'] + vacancy['payment_to']) / 2
-    elif vacancy['payment_from'] == 0:
-        average_salary = vacancy['payment_to'] * 0.8
-    elif vacancy['payment_to'] == 0:
-        average_salary = vacancy['payment_from'] * 1.2
-    else:
+    if not vacancy["payment_from"] and not vacancy["payment_to"]:
         average_salary = None
+    else:
+        average_salary = calculate_average_salary(vacancy["payment_from"],
+                                                  vacancy["payment_to"])
     return average_salary
 
 
