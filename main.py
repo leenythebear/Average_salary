@@ -22,10 +22,10 @@ def create_table(vacancies_statistic, title):
 
 
 def main():
-    sj_vacancies_statistic = main_sj()
+    sj_vacancies_statistic = get_sj_total_average_salary(LANGUAGES)
     sj_title = "SuperJob Moscow"
 
-    hh_vacancies_statistic = main_hh()
+    hh_vacancies_statistic = get_hh_total_average_salary(LANGUAGES)
     hh_title = "Headhunter Moscow"
 
     print(create_table(hh_vacancies_statistic, hh_title))
