@@ -42,9 +42,7 @@ def get_hh_total_average_salary(languages):
         vacancies = get_all_language_vacancies(language)
         for vacancy in vacancies:
             average_salary = predict_rub_salary_hh(vacancy)
-            if not average_salary:
-                continue
-            else:
+            if average_salary:
                 sum_of_salary += average_salary
                 count += 1
         hh_vacancies.setdefault(
