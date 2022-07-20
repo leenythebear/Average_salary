@@ -38,7 +38,7 @@ def predict_rub_salary_for_superjob(vacancy):
     return average_salary
 
 
-def get_total_average_salary(languages):
+def get_sj_total_average_salary(languages):
     sj_vacancies = {}
     for language in languages:
         sum_of_salary = 0

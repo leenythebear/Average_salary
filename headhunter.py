@@ -30,7 +30,7 @@ def get_all_language_vacancies(language):
     return language_vacancies_list
 
 
-def get_total_average_salary(languages):
+def get_hh_total_average_salary(languages):
     hh_vacancies = {}
     for language in languages:
         sum_of_salary = 0
