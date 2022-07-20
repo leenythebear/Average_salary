@@ -1,22 +1,9 @@
 import requests as requests
 
-
-hh_url = "https://api.hh.ru/vacancies"
-languages = [
-    "Python",
-    "JavaScript",
-    "Java",
-    "Ruby",
-    "PHP",
-    "C++",
-    "C#",
-    "C",
-    "Go",
-    "Shell",
-]
+from settings import LANGUAGES, HH_URL
 
 
-def get_response(language, page, hh_url):
+def get_response(language, page, url):
     search = {
         "text": f"Разработчик {language}",
         "area": 1,
@@ -24,20 +11,20 @@ def get_response(language, page, hh_url):
         "page": page,
     }
     headers = {"User-Agent": "User-Agent"}
-    page_response = requests.get(hh_url, headers=headers, params=search)
+    page_response = requests.get(url, headers=headers, params=search)
     page_response.raise_for_status()
     return page_response.json()
 
 
-def get_all_language_vacancies(language, hh_url):
+def get_all_language_vacancies(language):
     language_vacancies_list = []
     page = 0
-    first_page_vacancies = get_response(language, page, hh_url)
+    first_page_vacancies = get_response(language, page, HH_URL)
     page += 1
     language_vacancies_list.extend(first_page_vacancies['items'])
     pages_number = first_page_vacancies['pages']
     while page < pages_number:
-        vacancies = get_response(language, page, hh_url)
+        vacancies = get_response(language, page, HH_URL)
         page += 1
         language_vacancies_list.extend(vacancies['items'])
     return language_vacancies_list
@@ -48,7 +35,7 @@ def get_total_average_salary(languages):
     for language in languages:
         sum_of_salary = 0
         count = 0
-        vacancies = get_all_language_vacancies(language, hh_url)
+        vacancies = get_all_language_vacancies(language)
         for vacancy in vacancies:
             average_salary = predict_rub_salary_hh(vacancy)
             if not average_salary:
@@ -85,7 +72,7 @@ def predict_rub_salary_hh(vacancy):
 
 
 def main_hh():
-    average_salary = get_total_average_salary(languages)
+    average_salary = get_total_average_salary(LANGUAGES)
     return average_salary
 
 
