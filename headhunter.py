@@ -50,7 +50,7 @@ def get_hh_total_average_salary(languages):
             {
                 "vacancies_found": len(vacancies),
                 "vacancies_processed": count,
-                "average_salary": int(sum_of_salary / count),
+                "average_salary": int(sum_of_salary / count) if count else 0,
             },
         )
     return hh_vacancies
