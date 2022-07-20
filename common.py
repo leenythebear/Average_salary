@@ -1,4 +1,3 @@
-
 def calculate_average_salary(salary_from, salary_to):
     if salary_from and salary_to:
         average_salary = (salary_from + salary_to) / 2

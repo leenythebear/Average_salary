@@ -24,13 +24,13 @@ def get_all_language_vacancies(language):
     page = 0
     first_page_vacancies = get_response(language, page)
     vacancies_per_page = 20
-    total_vacancies = first_page_vacancies['total']
-    language_vacancies.extend(first_page_vacancies['objects'])
+    total_vacancies = first_page_vacancies["total"]
+    language_vacancies.extend(first_page_vacancies["objects"])
     while 0 < total_vacancies:
         vacancies = get_response(language, page)
         page += 1
         total_vacancies -= vacancies_per_page
-        language_vacancies.extend(vacancies['objects'])
+        language_vacancies.extend(vacancies["objects"])
     return language_vacancies
 
 
@@ -38,8 +38,9 @@ def predict_rub_salary_for_superjob(vacancy):
     if not vacancy["payment_from"] and not vacancy["payment_to"]:
         average_salary = None
     else:
-        average_salary = calculate_average_salary(vacancy["payment_from"],
-                                                  vacancy["payment_to"])
+        average_salary = calculate_average_salary(
+            vacancy["payment_from"], vacancy["payment_to"]
+        )
     return average_salary
 
 
@@ -63,5 +64,3 @@ def get_sj_total_average_salary(languages):
             },
         )
     return sj_vacancies
-
-
