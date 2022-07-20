@@ -4,7 +4,7 @@ languages = ['Python', 'JavaScript', 'Java', 'Ruby', 'PHP', 'C++', 'C#', 'C', 'G
 sj_url = 'https://api.superjob.ru/2.0/vacancies'
 
 
-def get_response(language, page, url):
+def get_response(language, page, url, secret_key):
     headers = {'X-Api-App-Id': secret_key}
     params = {'key': 48, 'keywords': f'Разработчик {language}', 'town': 4, 'page': page}
     response = requests.get(url, headers=headers, params=params)
@@ -12,15 +12,15 @@ def get_response(language, page, url):
     return response.json()
 
 
-def get_all_language_vacancies(language, url):
+def get_all_language_vacancies(language, url, secret_key):
     language_vacancies_list = []
     page = 0
-    first_list_vacancies = get_response(language, page, url)
+    first_list_vacancies = get_response(language, page, url, secret_key)
     vacancies_per_page = 20
     total_vacancies = first_list_vacancies['total']
     language_vacancies_list.extend(first_list_vacancies['objects'])
     while 0 < total_vacancies:
-        vacancies = get_response(language, page, url)
+        vacancies = get_response(language, page, url, secret_key)
         page += 1
         total_vacancies -= vacancies_per_page
         language_vacancies_list.extend(vacancies['objects'])
@@ -39,12 +39,12 @@ def predict_rub_salary_for_superjob(vacancy):
     return average_salary
 
 
-def get_total_average_salary(url, languages):
+def get_total_average_salary(url, languages, secret_key):
     sj_vacancies = {}
     for language in languages:
         sum_of_salary = 0
         count = 0
-        vacancies = get_all_language_vacancies(language, url)
+        vacancies = get_all_language_vacancies(language, url, secret_key)
         for vacancy in vacancies:
             average_salary = predict_rub_salary_for_superjob(vacancy)
             if average_salary == 0:
@@ -63,10 +63,10 @@ def get_total_average_salary(url, languages):
     return sj_vacancies
 
 
-def main_sj():
-    average_salaries_statistic = get_total_average_salary(sj_url, languages)
+def main_sj(secret_key):
+    average_salaries_statistic = get_total_average_salary(sj_url, languages, secret_key)
     return average_salaries_statistic
 
 
 if __name__ == '__main__':
-    main_sj()
+    main_sj(secret_key)
