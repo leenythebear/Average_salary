@@ -14,8 +14,8 @@ def create_table(vacancies_statistic, title):
             "Средняя зарплата",
         ]
     ]
-    for language, data in vacancies_statistic.items():
-        table_headers.append([language] + list(data.values()))
+    for language, vacancy_statistic in vacancies_statistic.items():
+        table_headers.append([language] + list(vacancy_statistic.values()))
     table = AsciiTable(table_headers, title)
     return table.table
 
