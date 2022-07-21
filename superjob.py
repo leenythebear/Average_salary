@@ -1,13 +1,13 @@
 import requests as requests
 
 from common import calculate_average_salary
-from settings import SECRET_KEY, SJ_URL
+from settings import SJ_URL
 
 
-def get_response(language, page):
+def get_response(language, page, secret_key):
     vacancies_sphere = 48
     moscow_city_id = 4
-    headers = {"X-Api-App-Id": SECRET_KEY}
+    headers = {"X-Api-App-Id": secret_key}
     params = {
         "key": vacancies_sphere,
         "keywords": f"Разработчик {language}",
@@ -19,15 +19,15 @@ def get_response(language, page):
     return response.json()
 
 
-def get_all_language_vacancies(language):
+def get_all_language_vacancies(language, secret_key):
     language_vacancies = []
     page = 0
-    first_page_vacancies = get_response(language, page)
+    first_page_vacancies = get_response(language, page, secret_key)
     vacancies_per_page = 20
     total_vacancies = first_page_vacancies["total"]
     language_vacancies.extend(first_page_vacancies["objects"])
     while 0 < total_vacancies:
-        vacancies = get_response(language, page)
+        vacancies = get_response(language, page, secret_key)
         page += 1
         total_vacancies -= vacancies_per_page
         language_vacancies.extend(vacancies["objects"])
@@ -44,12 +44,12 @@ def predict_rub_salary_for_superjob(vacancy):
     return average_salary
 
 
-def get_sj_total_average_salary(languages):
+def get_sj_total_average_salary(languages, secret_key):
     sj_vacancies = {}
     for language in languages:
         sum_of_salary = 0
         count = 0
-        vacancies = get_all_language_vacancies(language)
+        vacancies = get_all_language_vacancies(language, secret_key)
         for vacancy in vacancies:
             average_salary = predict_rub_salary_for_superjob(vacancy)
             if average_salary:
